@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation"; // Import useRouter
 
 export default function UserForm({ onAddUser }) {
     const [inputValues, setInputValues] = useState({
@@ -8,6 +9,8 @@ export default function UserForm({ onAddUser }) {
         alamat: '',
         no_telp: ''
     });
+
+    const router = useRouter();
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -21,6 +24,8 @@ export default function UserForm({ onAddUser }) {
         e.preventDefault();
         onAddUser(inputValues); // Call onAddUser function passed from the parent
         setInputValues({ nama: '', alamat: '', no_telp: '' }); // Reset form after submission
+
+        router.push("/"); // Redirect ke halaman utama setelah submit
     };
 
     return (
